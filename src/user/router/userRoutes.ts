@@ -9,7 +9,7 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 const userRouter = express.Router();
 
 userRouter.post('/login', userLogin);
-userRouter.get("/", [], allUsers);
+userRouter.get("/", [authMiddleware], allUsers);
 userRouter.post("/new", [upload.single('profilePicture')], newUser);
 userRouter.post("/update", [upload.single('profilePicture'), authMiddleware], updateUser);
 userRouter.get('/profile/', [authMiddleware], viewProfile);

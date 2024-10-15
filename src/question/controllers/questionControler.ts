@@ -35,7 +35,7 @@ const add = async (req: Request, res: Response) => {
     sendResponse(res, true, 200, "User registered successfully", []);
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 
@@ -47,7 +47,7 @@ const addCategory = async (req: Request, res: Response) => {
     sendResponse(res, true, 200, "User registered successfully", addCat);
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 
@@ -57,10 +57,10 @@ const getCategory = async (req: Request, res: Response) => {
   try {
 
     const result = await allCatagory({});
-    sendResponse(res, true, 200, "User registered successfully", result);
+    sendResponse(res, true, 200, "Catagory list fetch successfully", result);
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 
@@ -76,13 +76,13 @@ const getQsnByCat = async (req: Request, res: Response) => {
 
     const catId = req.query.catId as string;
     const id: number = parseInt(catId);
-    console.log("ididididid", id);
+   // console.log("ididididid", id);
 
     const result = await aggregateQuestionsByCategory(id);
-    sendResponse(res, true, 200, "get catagory qsn", result);
+    sendResponse(res, true, 200, "data fetch successfully", result);
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 
@@ -92,10 +92,10 @@ const getQsnAndCat = async (req: Request, res: Response) => {
   try {
 
     const result = await questionListByCategory();
-    sendResponse(res, true, 200, "get catagory qsn", result);
+    sendResponse(res, true, 200, "qustions list fetch successfully.", result);
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 
@@ -105,11 +105,11 @@ const bulkuploadQsn = async (req: Request, res: Response) => {
   try {
 
     const results: any[] = [];
-    console.log(req.file);
+    //console.log(req.file);
     const file_name=req.file ? req.file.filename : "";
 
    const filePath = path.join(__dirname, "..", "..", "..", "uploads", file_name);
-    console.log('filePath', filePath);
+   // console.log('filePath', filePath);
 
 
     fs.createReadStream(filePath)
@@ -129,14 +129,14 @@ const bulkuploadQsn = async (req: Request, res: Response) => {
 
          
         }
-        console.log("done");
+        //console.log("done");
 
         sendResponse(res, true, 200, "csv Upload successfully.", []);
       });
 
 
   } catch (error) {
-    sendResponse(res, false, 200, "somthing went wrong!", error);
+    sendResponse(res, false, 500, "somthing went wrong!", error);
 
   }
 

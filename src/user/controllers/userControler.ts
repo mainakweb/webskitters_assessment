@@ -38,7 +38,7 @@ const newUser = async (req: Request, res: Response) => {
     const {name, email, password, age, sex} = req.body;
     try {
 
-        console.log("req.body)req.body)", req.body);
+       // console.log("req.body)req.body)", req.body);
 
         // Check if the user already exists
         const existingUser = await UserModel.findOne({ email });
@@ -62,7 +62,7 @@ const newUser = async (req: Request, res: Response) => {
         sendResponse(res, true, 200, "User registered successfully", resp);
 
     } catch (error) {
-        sendResponse(res, false, 200, "somthing went wrong!", error);
+        sendResponse(res, false, 500, "somthing went wrong!", error);
 
     }
 
@@ -71,10 +71,10 @@ const updateUser = async (req: Request, res: Response) => {
   const {email, name, age, sex } = req.body;
     try {
 
-        console.log("req.body)req.body)", req.body);
+       // console.log("req.body)req.body)", req.body);
         
         const {id} = req.body.user;
-let updateData;
+        let updateData;
         //const updateData = req.file ? {email, name, age, sex, profilePicture : req.file.path}req.file.path : "";
         if(req.file) {
           updateData = {email, name, age, sex, profilePicture : req.file.path};
@@ -86,7 +86,7 @@ let updateData;
         sendResponse(res, true, 200, "Successfully fetched users", resp);
 
     } catch (error) {
-        sendResponse(res, false, 200, "fetched users error", error);
+        sendResponse(res, false, 500, "fetched users error", error);
 
     }
 
